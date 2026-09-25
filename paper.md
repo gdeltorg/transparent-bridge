@@ -1,5 +1,14 @@
 # Predictive Transparent Hardware Bridging over IP
 
+**Submission type:** systems research paper / technical disclosure  
+**Status:** reproducible design and evaluation proposal; not a claim of
+patentability or a report of completed experimental results.
+
+**Keywords:** transparent hardware bridge, native interface, Bluetooth-over-IP,
+HDMI-over-IP, DisplayPort-over-IP, probability, confidence calibration,
+speculative reconstruction, authoritative correction, perceived latency,
+event pre-notification.
+
 ## Abstract
 
 This paper proposes a predictive transparent hardware bridge for extending a
@@ -40,6 +49,42 @@ power-management policy. A geographically remote path can provide a better
 experience if the bridge predicts repeatable future state, transports
 authoritative corrections efficiently, and uses deterministic local hardware
 loops.
+
+## 2.1 Research questions and contributions
+
+This work asks four separately testable questions:
+
+1. Can a declared remote physical or effective transport path beat a selected
+   local baseline at declared observation points?
+2. Can local deadline handling and protocol-preserving reconstruction reduce
+   end-to-end delay relative to that baseline?
+3. Can probability-calibrated early output provide useful information before
+   delayed authoritative output, while bounding false commits and retractions?
+4. Do users prefer and trust the result when the interface distinguishes
+   warning, candidate, confirmation, and correction?
+
+The proposed contributions are (a) a native-interface capability graph that
+composes heterogeneous adapters; (b) synchronized bidirectional probability
+and confidence records; (c) a commit/correction policy for speculative media
+and control state; (d) a dual-display validation protocol; and (e) an
+append-only audit schema that makes claims replayable.
+
+## 2.2 Terminology and comparison layers
+
+“Physical propagation” is transit time through a declared medium between
+declared points. “Effective transport” includes forwarding, serialization,
+packetization, and queueing. “End-to-end latency” includes endpoint
+processing, codec, buffering, rendering, and actuation. “Perceived latency”
+is the measured or reported time to useful information. These quantities must
+not be substituted for one another.
+
+“Probability” is an event likelihood conditional on stated evidence and a
+reference population. “Confidence” is calibrated trust in the estimate,
+including freshness and out-of-distribution risk. A probability can be high
+while confidence is low if the model is poorly calibrated; a high confidence
+score is not proof that an event occurred. A forecast is a time-indexed
+distribution, a detection is evidence of an already-occurring event, and an
+early warning is a policy action based on one or more of these signals.
 
 ## 3. Prior art and the physical/perceived distinction
 
@@ -348,7 +393,38 @@ cloud-rendering, cloud-gaming, frame-generation, and asynchronous time-warp
 work supports adjacent layers, not the complete cross-medium bridge or a
 sixty-second football-advance product.
 
-## 13. Limitations
+## 13. Reproducible study design
+
+For every medium, publish a hardware bill of materials, firmware and model
+hashes, topology, distance, link rate, route, clock source, queue policy,
+packet-loss and jitter traces, and the exact local baseline configuration.
+Pre-register event definitions, thresholds, inclusion criteria, prediction
+horizons, and correction policy. Split data by time and subject so evaluation
+events, speakers, matches, and device sessions are not present in model
+selection.
+
+Report calibration with reliability diagrams and Brier score or log loss in
+addition to accuracy. Report precision, recall, false-positive cost, false
+commit cost, correction time, coverage, and horizon distributions. For human
+studies, randomize condition order, blind participants to implementation where
+practical, report sample size and confidence intervals, and separate
+usefulness from trust and confusion. A result is a claim about the tested
+baseline, population, and observation points, not a universal claim that
+remote links are faster than local links.
+
+## 14. Security, privacy, and misuse controls
+
+Prediction inputs may contain private speech, identifiers, telemetry, device
+keys, or protected media. The implementation must authenticate endpoints,
+protect keys, encrypt transport, bind records to a session and model epoch,
+prevent replay, and retain only minimum audit data. The UI must label
+provisional content and make retraction visible. Safety-critical control
+operations should default to authoritative confirmation rather than speculative
+commit. Event pre-notification must not fabricate evidence, impersonate a
+broadcast, or trigger collective action without explicit authorization and a
+rollback policy.
+
+## 15. Limitations
 
 The system is not a universal claim that every physical-layer timing constraint
 can cross arbitrary distance. Some functions must remain local. “Transparent”
@@ -356,7 +432,7 @@ means preserving the endpoint-visible behavior within a defined conformance
 profile, not bypassing electrical, radio, cryptographic, regulatory, or
 content-protection constraints.
 
-## 14. Conclusion
+## 16. Conclusion
 
 A hardware-assisted bridge pair with synchronized prediction can make a remote
 endpoint feel more responsive than an ordinary local wireless path whose codec
@@ -364,3 +440,20 @@ and buffering dominate the experience. The key engineering contribution is the
 combination of local deadline loops, native identity/state preservation,
 predictive bidirectional reconstruction, authoritative correction, and
 deterministic transport.
+
+## References
+
+1. Hirofuchi et al., “USB/IP - a Peripheral Bus Extension for Device Sharing
+   over IP Network,” USENIX FREENIX, 2005,
+   https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi.html
+2. Hirofuchi et al., “USB/IP: A Transparent Device Sharing Technology over IP
+   Network,” IPSJ Digital Courier, DOI: 10.2197/ipsjdc.1.394,
+   https://doi.org/10.2197/ipsjdc.1.394
+3. “Latency Reduction in CloudVR: Cloud Prediction, Edge Correction,” arXiv:
+   2410.01898, https://arxiv.org/abs/2410.01898
+4. “Nebula: Reliable Low-latency Video Transmission for Mobile Cloud Gaming,”
+   arXiv:2201.07738, https://arxiv.org/abs/2201.07738
+5. “Foveated Video Streaming for Cloud Gaming,” arXiv:1706.04804,
+   https://arxiv.org/abs/1706.04804
+6. “Network Anatomy and Real-Time Measurement of Nvidia GeForce NOW Cloud
+   Gaming,” arXiv:2401.06366, https://arxiv.org/abs/2401.06366
