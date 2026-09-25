@@ -1,6 +1,6 @@
 # Predictive Transparent Hardware Bridging over IP
 
-**Submission type:** systems research paper / technical disclosure  
+**Submission type:** systems research paper / technical disclosure
 **Status:** reproducible design and evaluation proposal; not a claim of
 patentability or a report of completed experimental results.
 
