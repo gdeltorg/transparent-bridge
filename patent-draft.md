@@ -45,6 +45,14 @@ The native interface may comprise Bluetooth, Bluetooth Low Energy, HDMI,
 DisplayPort, Wi-Fi, USB, or another interface having endpoint-visible device
 identity, capability negotiation, control state, and timing behavior.
 
+For purposes of this disclosure, probability is an estimate conditional on
+declared evidence; confidence is a calibrated assessment of the estimate's
+reliability; a forecast is a time-indexed distribution; detection is evidence
+of an event already present in an observation; an early warning is a policy
+action; and a candidate reconstruction is a provisional output. The bridge
+stores the signal type so that a probability or warning is not represented as
+authoritative detection.
+
 The first and second native interfaces need not use the same medium. A path
 may comprise HDMI-to-DisplayPort, HDMI-to-USB display, Bluetooth-to-Bluetooth,
 Wi-Fi-to-Ethernet, USB-to-HDMI, or another sequence selected from registered
@@ -79,6 +87,16 @@ using local PHY timing loops.
 fallback.
 
 ## Detailed description
+
+### Definitions and operating modes
+
+The bridge can operate in transparent relay mode, translated-adapter mode,
+speculative reconstruction mode, authoritative-only mode, or fail-safe mode.
+An operator or policy engine may set separate thresholds for displaying a
+warning, playing a candidate, committing a control action, and retracting a
+candidate. Thresholds may depend on event class, confidence calibration,
+latency budget, false-commit cost, content-protection policy, and whether the
+output is reversible.
 
 ### Architecture
 
@@ -148,6 +166,20 @@ The system authenticates devices and bridge firmware, protects identity and
 pairing material, prevents replay, binds predictions to a session and model
 epoch, and keeps content-protection keys in secure hardware. A policy engine
 can disable prediction for security-sensitive control operations.
+
+### Event and service notifications
+
+For a service quota, battery state, storage capacity, thermal condition,
+network congestion, transit arrival, weather condition, industrial telemetry,
+sports event, or constrained speech transcript, an inference engine receives
+permitted evidence and emits a probability, confidence, forecast, detection,
+warning, or candidate record. A first display can present an early warning or
+candidate while a second display presents delayed authoritative state. When
+authoritative state arrives, an association engine matches event identity and
+time, then commits, corrects, retracts, or marks the candidate. The audit
+record stores evidence freshness, signal type, threshold, model/version,
+prediction horizon, confidence, authoritative result, false advance,
+confirmation, and correction.
 
 ## Exemplary claims
 
@@ -250,6 +282,28 @@ can disable prediction for security-sensitive control operations.
     event identity, confidence, and correction state, and an audit log records
     false-advance rate, confirmation rate, retraction rate, and authoritative
     agreement.
+
+23. The system of claim 1, wherein separate policy thresholds control display
+    of a warning, playback of a candidate reconstruction, commitment of a
+    reversible action, commitment of an irreversible action, and retraction of
+    a candidate.
+
+24. The system of claim 1, wherein the audit record is append-only and binds a
+    signal type, evidence freshness, input hash, model version, confidence,
+    event identity, authoritative result, threshold, presentation timestamp,
+    correction, and display decision to a session and prediction epoch.
+
+25. A method comprising: receiving permitted evidence at a first endpoint;
+    generating a probability distribution and calibrated confidence; selecting
+    a warning or candidate output according to a policy; presenting the
+    warning or candidate before delayed authoritative state; receiving the
+    authoritative state; associating the states by identity and time; and
+    committing, correcting, retracting, or marking the candidate.
+
+26. The method of claim 25, further comprising comparing the candidate against
+    held-out events and reporting precision, recall, calibration, coverage,
+    prediction horizon, false-commit rate, confirmation rate, retraction rate,
+    correction time, and p50, p95, and p99 time-to-useful-information.
 
 ## Abstract
 
