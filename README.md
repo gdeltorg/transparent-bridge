@@ -24,6 +24,15 @@ conventional local direct connection whose buffering, interference, codec, or
 device processing is worse. This is an engineering target, not a guarantee for
 every medium or workload.
 
+The central research question is separated into four layers: whether a
+measured physical/effective path can beat a selected local baseline; whether
+end-to-end processing can beat it; whether constrained prediction can present
+useful output early; and whether users prefer and trust the result. A football
+embodiment can show a clearly labelled predicted goal replay on the main
+display while a small inset retains the authoritative delayed feed. This is a
+testable product hypothesis, not a claim that arbitrary unknown events can be
+known in advance.
+
 This repository is a technical disclosure and drafting aid, not legal advice and
 not a patent filing. A patent attorney should review claim scope, inventorship,
 prior art, enablement, and jurisdiction-specific formal requirements.
