@@ -78,14 +78,37 @@ native-transparent, translated, predicted, or unsupported. “Unlimited
 combination” means arbitrary composition from registered adapters, not an
 assumption that every physically incompatible pair is automatically possible.
 
-## 5. Prediction of structured future output
+## 5. Probability, confidence, and early output
 
-Prediction is most useful where the source has stable structure, such as
-speech, repeated UI motion, camera motion, musical timing, or a known protocol
-state machine. A predictor may produce a provisional audio/text/video segment
-before its authoritative source segment arrives. The receiver stores the
-prediction epoch and confidence, displays or plays it only under a policy
-threshold, and records the authoritative comparison.
+The system must distinguish several related concepts:
+
+- **Probability** is the estimated frequency of an event under a defined
+  reference population and information set, such as “goal within five
+  minutes: 0.93.”
+- **Confidence** is the system's calibrated belief in this particular
+  estimate, including model quality, input freshness, and out-of-distribution
+  risk. It is not automatically the probability that the event is true.
+- **Forecast** is a time-indexed distribution over possible future states.
+- **Detection** is evidence that an event has already occurred; it is not a
+  forecast merely because the authoritative feed is delayed.
+- **Early warning** is a user-visible action selected from a probability and a
+  cost policy. It may be useful even when it is not certain.
+- **Candidate reconstruction** is a provisional media or control output; it
+  must remain labelled provisional until authoritative confirmation.
+- **Rule-triggered pre-notification** is deterministic when a known threshold,
+  quota, timer, or state transition has been crossed, although the delayed
+  display may not yet show it.
+
+The bridge may use any of these signals, but must log which one caused the
+large display to act. It must not call a deterministic threshold alert an AI
+prediction, or call a high-confidence forecast a confirmed event.
+
+Early output is most useful where the source has stable structure, such as
+speech, repeated UI motion, camera motion, musical timing, a known protocol
+state machine, or a deterministic service quota. A receiver may display or
+play a provisional audio/text/video segment before its authoritative segment
+arrives, subject to a policy threshold and an explicit provisional marker.
+The authoritative comparison is always retained.
 
 For speech experiments, a live interviewer segment can be used as a
 constrained benchmark: predict the next words from the observed question,
@@ -111,6 +134,44 @@ false-positive/retraction risk. It is not a claim that an arbitrary television
 can know an event before every causal signal reaches it. The interface must
 distinguish prediction, confirmation, and retraction; a prediction that is
 later correct is not retroactively treated as authoritative evidence.
+
+### 5.2 Ten practical early-notification patterns
+
+The following examples use a large display for the early notice and a small
+display for the delayed authoritative reproduction. They are product patterns,
+not claims that the large display has received impossible information:
+
+1. **Cloud quota:** a Microsoft/Azure usage threshold or budget rule triggers a
+   large-screen warning; five minutes later the delayed usage dashboard
+   reproduces the threshold crossing.
+2. **Network congestion:** queue telemetry gives a high-probability congestion
+   warning; the delayed link view later shows packet loss or rising latency.
+3. **Power and battery:** a power-management model warns of imminent battery
+   depletion; the delayed device telemetry later confirms the low-battery
+   state.
+4. **Storage exhaustion:** write-rate and free-space telemetry cross a
+   deterministic or probabilistic threshold; the delayed filesystem view later
+   shows the same capacity event.
+5. **Thermal throttling:** sensor trend and fan state indicate likely
+   throttling; the delayed performance trace later records the clock reduction.
+6. **Transit arrival:** vehicle position and schedule data produce an arrival
+   window; the delayed station camera later shows the vehicle entering.
+7. **Weather alert:** radar and nowcast probability trigger a rain or hail
+   notice; the delayed local camera or sensor feed later confirms precipitation.
+8. **Industrial maintenance:** vibration, pressure, and temperature telemetry
+   raise a failure-risk alert; the delayed machine log later records the fault
+   or maintenance threshold.
+9. **Sports event:** a trusted venue/event feed gives a high-confidence goal
+   indication; the delayed broadcast later shows the goal, with false-advance
+   and retraction handling.
+10. **Interview transcription:** a constrained topic, speaker, and grammar
+    model produces likely next words; the delayed authoritative transcript
+    later confirms, edits, or rejects each token.
+
+For each pattern, the UI should display the event time, evidence source,
+probability, confidence, freshness, and action policy. A five-minute replay
+does not prove that the warning was correct unless the audit joins the exact
+warning to the exact later authoritative event.
 
 ## 6. System model
 
