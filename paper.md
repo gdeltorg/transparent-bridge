@@ -95,6 +95,23 @@ prediction with the later transcript. An experiment may test horizons from
 defined scripted or highly constrained setting. It must not be presented as
 general ability to know an unconstrained future statement.
 
+### 5.1 Event-triggered advance presentation
+
+A sports broadcast illustrates a product embodiment without requiring the
+system to violate causality. A prediction service can use an authorized
+low-latency event feed, venue sensors, or a trusted camera feed to predict a
+football goal. The main display may show a clearly labelled provisional goal
+replay or celebration, while a small inset continues to show the delayed
+authoritative live feed. When the authoritative feed reaches the same event,
+the system compares event identity and timestamp, then commits, corrects, or
+retracts the provisional presentation.
+
+This is a measured tradeoff between earlier useful information and
+false-positive/retraction risk. It is not a claim that an arbitrary television
+can know an event before every causal signal reaches it. The interface must
+distinguish prediction, confirmation, and retraction; a prediction that is
+later correct is not retroactively treated as authoritative evidence.
+
 ## 6. System model
 
 Let endpoint A connect to a source device and endpoint B connect to a sink
@@ -245,6 +262,30 @@ prediction horizon, and confidence calibration. Do not count a prediction as
 successful merely because its topic is similar; exact and semantic metrics
 must be reported separately. Pre-registration, held-out speakers, and
 adversarial interruptions are required before claiming generalization.
+
+For a football-goal experiment, freeze a replayable authoritative feed and
+provide the predictor only the inputs available at the proposed advance point.
+Compare ordinary local broadcast, ordinary buffered broadcast, non-predictive
+remote relay, and predictive relay. Show the provisional event on the large
+display and the authoritative delayed feed in a small inset. Record event
+detection, authoritative arrival, presentation time, advance horizon, event
+precision and recall, false-advance rate, retraction rate, duplicate rate,
+confirmation rate, event identity agreement, and p50/p95/p99 time-to-useful-
+information and time-to-correction. Measure viewer usefulness, confusion,
+trust, and perceived latency in a randomized study.
+
+The append-only audit log must include predictor-input hash, model/version,
+threshold, confidence, predicted event, authoritative event, timestamps,
+correction, and display decision. Use held-out matches or events; selecting
+only successful goals would invalidate the result through leakage.
+
+Evidence should be labelled at four levels: (1) calibrated physical/effective
+link measurements at declared endpoints, (2) end-to-end system measurements,
+(3) held-out prediction accuracy, coverage, horizon, calibration and
+correction, and (4) randomized user-experience results. Existing USB/IP,
+cloud-rendering, cloud-gaming, frame-generation, and asynchronous time-warp
+work supports adjacent layers, not the complete cross-medium bridge or a
+sixty-second football-advance product.
 
 ## 13. Limitations
 
