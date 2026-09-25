@@ -52,6 +52,16 @@ adapters. A capability graph describes format, clock, control, security,
 prediction, and correction compatibility for each adapter. A path manager
 validates and schedules the composition before activation.
 
+In an event-broadcast embodiment, a predictor receives a permitted correlated
+feed and generates a provisional event presentation. A large display presents
+the provisional presentation with a prediction marker while a smaller display
+continues to present an authoritative delayed feed. On authoritative arrival,
+the system associates the event records and commits, corrects, retracts, or
+marks the provisional presentation. The system records advance horizon,
+confidence, event identity, false advances, confirmations, and corrections.
+This embodiment does not assume that an arbitrary unknown event can be known
+before its causal evidence exists.
+
 ## Brief description of drawings
 
 **Figure 1** shows two native endpoints connected through a deterministic IP
@@ -219,6 +229,17 @@ can disable prediction for security-sensitive control operations.
     or text output from a constrained source context, and the system reports
     prediction coverage, horizon, confidence calibration, exact accuracy, and
     correction rate without treating topical similarity as exact prediction.
+
+21. The system of claim 1, wherein a provisional event presentation is shown
+    on a first display while an authoritative delayed presentation is shown on
+    a second display, and wherein the system associates, commits, corrects, or
+    retracts the provisional presentation when authoritative event data arrives.
+
+22. The system of claim 21, wherein the event comprises a sports event, the
+    provisional presentation includes an advance horizon, prediction marker,
+    event identity, confidence, and correction state, and an audit log records
+    false-advance rate, confirmation rate, retraction rate, and authoritative
+    agreement.
 
 ## Abstract
 
