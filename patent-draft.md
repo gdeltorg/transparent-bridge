@@ -93,10 +93,13 @@ identifier, direction, sequence number, source timestamp, intended presentation
 time, prediction epoch, model identifier, confidence, integrity value, and
 correction reference. A receiver rejects stale epochs and replayed records.
 
-### Prediction and correction
+### Probability, confidence, early output, and correction
 
-The A-to-B predictor produces a speculative record before receipt of the
-corresponding authoritative record. The B-to-A predictor predicts return
+The A-to-B inference engine may produce a probability distribution, calibrated
+confidence, forecast, early warning, candidate reconstruction, or deterministic
+threshold notification before receipt of the corresponding authoritative
+record. The system stores the signal type and does not represent a forecast or
+warning as confirmed detection. The B-to-A predictor predicts return
 traffic, acknowledgements, flow control, capability responses, or other
 state. A commit policy may require a confidence threshold, a bounded
 prediction horizon, a matching model hash, and a permitted operation class.
@@ -123,6 +126,13 @@ prediction epoch, horizon, model hash, confidence, authoritative result, error
 metric, correction, and commit decision. Speech embodiments may report word
 error, character error, exact match, semantic match, coverage, false commit,
 and correction rate over held-out speakers and events.
+
+The event engine may operate on service quotas, network congestion, battery
+state, storage capacity, thermal state, transit arrival, weather, industrial
+telemetry, sports events, or constrained interview transcripts. A large display
+may show an early warning or candidate output while a smaller display shows
+delayed authoritative state. The audit record identifies whether the action was
+rule-triggered, probabilistic, forecast, detected, or reconstructed.
 
 ### Network and timing
 
