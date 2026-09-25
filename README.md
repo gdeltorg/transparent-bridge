@@ -8,6 +8,15 @@ preserving the endpoint's native device experience.
 
 - [Technical paper](paper.md)
 - [Patent application draft](patent-draft.md)
+- [Prior-art and evidence index](prior-art.md)
+
+The paper is organized as a submission-ready research proposal: it states
+research questions, separates physical/effective/end-to-end/perceived latency,
+defines probability and confidence, specifies the bridge architecture and
+cross-medium capability graph, and provides a reproducible evaluation and
+audit protocol. The patent document is a claim-oriented drafting document;
+patent counsel must adapt it to the filing jurisdiction and verify novelty,
+inventorship, enablement, and formal requirements before submission.
 
 ## Scope
 
